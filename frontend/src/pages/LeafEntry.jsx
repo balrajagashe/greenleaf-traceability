@@ -15,23 +15,37 @@ export default function LeafEntry() {
     .then(setAgents);
   }, []);
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/leaf-entry`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({
-        agent_id: Number(agentId),
-        date: dateVal,
-        total_quantity: Number(quantity)
-      })
-    });
-    const data = await res.json();
-    setAlloc(data);
-  };
+  
+
++  const handleSubmit = async (e) => {
++    e.preventDefault();
++    setError('');
++    try {
++      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/leaf-entry`, {
++        method: 'POST',
++        headers: {
++          'Content-Type': 'application/json',
++          'Authorization': `Bearer ${localStorage.getItem('token')}`
++        },
++        body: JSON.stringify({
++          agent_id: Number(agentId),
++          date: dateVal,
++          total_quantity: Number(quantity)
++        })
++      });
++      if (!res.ok) {
++        // capture status + body
++        const text = await res.text();
++        throw new Error(`Server responded ${res.status}: ${text}`);
++      }
++      const data = await res.json();
++      setAlloc(data);
++    } catch (err) {
++      console.error(err);
++      setError(err.message);
++    }
++  };
+
 
   return (
     <div>
