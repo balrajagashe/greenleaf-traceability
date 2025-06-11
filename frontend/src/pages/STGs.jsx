@@ -7,7 +7,7 @@ export default function STGs() {
   const [area, setArea] = useState('');
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/stgs`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/stgs`, { … })
       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     })
     .then(res => res.json())
