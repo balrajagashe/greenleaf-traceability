@@ -6,7 +6,7 @@ export default function Agents() {
   const [contact, setContact] = useState('');
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/agents`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/agents`, { … })
       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     })
     .then(res => res.json())
