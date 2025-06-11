@@ -4,7 +4,7 @@ export default function Reports() {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/leaf-entry`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/leaf-entry`, { … })
       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     })
     .then(res => res.json())
